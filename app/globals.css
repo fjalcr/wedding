@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+.font-script { font-family: 'Great Vibes', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
+.font-serif-elegant { font-family: 'Playfair Display', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
