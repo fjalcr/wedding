@@ -2,126 +2,6 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-const wedding = {
-  // Datos base
-  couple: { bride: "Adriana", groom: "Eduardo" },
-  dateISO: "2026-02-14T17:00:00-05:00",
-  dateLabel: "14 de febrero de 2026",
-  city: "Mérida, Yucatán",
-  venue: {
-    name: "Boda Adriana & Eduardo",
-    address: "Hacienda San Ángel, Carretera Mérida – Progreso Km 12, Mérida, Yuc.",
-    mapsQuery: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29860.8183759968!2d-88.22502137452723!3d20.685753025417412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f510ada7bbef3f7%3A0xed7a1f8fe539aa31!2sValladolid%2C%20Yucatan!5e0!3m2!1sen!2smx!4v1763930663669!5m2!1sen!2smx",
-  },
-
-  // Imágenes (todas las rutas configurables aquí)
-  hero: {
-    image:
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1920&auto=format&fit=crop",
-    hashtag: "#AdrianaYEduardo",
-    curvedText: "Reserva la fecha de nuestra boda",
-  },
-  images: {
-    story:
-      "https://plus.unsplash.com/premium_photo-1665159098184-d43c2bf651f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    honeymoonBox:
-      "https://images.unsplash.com/photo-1520256862855-398228c41684?q=80&w=1200&auto=format&fit=crop",
-  },
-
-  // Paletas de color para Dress Code (copiadas de la referencia)
-  colors: {
-    womenPalette: [
-      "#E2773E", // naranja
-      "#E8633A", // coral
-      "#E44F93", // rosa fuerte
-      "#8E3A96", // morado
-      "#B7C94A", // verde lima
-      "#A9E3EA", // aqua claro
-      "#51B5D6", // azul aqua
-      "#486FA1", // azul medio
-      "#353C85", // azul profundo
-    ],
-    menPalette: [
-      "#A0A0A0", // gris
-      "#B5C650", // verde lima suave
-      "#A9E3EA", // aqua claro
-      "#51B5D6", // azul aqua
-      "#486FA1", // azul medio
-      "#353C85", // azul profundo
-    ],
-  },
-
-  // Estilo / opciones
-  schedule: [
-    { time: "5:00 pm", title: "Ceremonia", note: "Capilla de la hacienda" },
-    { time: "6:30 pm", title: "Coctel", note: "Jardín principal" },
-    { time: "8:00 pm", title: "Cena", note: "Salón colonial" },
-    { time: "10:00 pm", title: "Fiesta", note: "Terraza" },
-  ],
-
-  // COPYS configurables
-  copy: {
-    hero: {
-      cityVenueSeparator: " • ",
-    },
-    story: {
-      title: "Nuestra historia",
-      subtitle: "Cómo Adriana y Eduardo llegaron hasta aquí 💫",
-      paragraphs: [
-        "Adriana y Eduardo se conocieron en 2018 en un café del centro. Desde entonces han compartido viajes, risas y muchos tacos al pastor. Hoy comienza un nuevo capítulo y quieren celebrarlo con ustedes.",
-        "La celebración será en Hacienda San Ángel, Mérida, Yucatán. Una tarde‑noche llena de música y buenos momentos.",
-      ],
-    },
-    itinerary: {
-      title: "Itinerario",
-      subtitle: "Todo lo que necesitas para no perderte nada",
-      dateLabel: "Fecha",
-      // Dress code (según imagen proporcionada)
-      dressCodeTitle: "DRESS CODE",
-      dressCodeSubtitle:
-        "Considera la elegancia y comodidad para disfrutar de una celebración en un entorno natural.",
-      womenTitle: "Mujeres",
-      womenDescription:
-        "Vestido largo o midi, conjunto de dos piezas de siluetas simples. Zapatos de tacones gruesos para mayor comodidad.",
-      womenForbidden:
-        "No usar color blanco, plateado, negro, beige, rojo, dorado o colores que puedan parecer blanco.",
-      menTitle: "Hombres",
-      menDescription:
-        "Camisa manga larga fresca, lisa o con textura sutil. Pantalón de vestir y zapatos formales, no tenis. Se considera el blazer opcional, no corbata.",
-      menForbidden: "No usar color negro, blanco o beige.",
-    },
-    location: {
-      title: "Ubicación",
-      mapsButton: "Abrir en Google Maps",
-    },
-    honeymoon: {
-      title: "Nuestra luna de miel",
-      subtitle: "Un sueño que comienza con su cariño 💛",
-      paragraph1:
-        "Como toda gran aventura, nuestro próximo capítulo comienza con un sueño: vivir una luna de miel única, llena de momentos que recordemos para siempre.",
-      paragraph2:
-        "Hemos creado una pequeña caja de los deseos, un espacio simbólico donde pueden dejar su abrazo en forma de aportación para construir juntos este viaje. Cada detalle que ahí se deje será una pieza más de esta historia que estamos por vivir.",
-      paragraph3:
-        "Gracias por ser parte de nuestro inicio, por impulsarnos a volar un poquito más lejos y por acompañarnos en este proyecto tan especial.",
-      signature: "Con cariño,\nNuestra futura versión recién casados",
-    },
-    rsvp: {
-      title: "Confirma tu asistencia",
-      subtitle:
-        "Da clic al botón para registrar tu asistencia.",
-      buttonLabel: "Confirmar asistencia",
-      missingCode: "Falta el parámetro ?code=",
-      invalidCode: "Código no válido",
-      defaultMessage: "Comparte el enlace con ?code= para confirmar.",
-      greetingPrefix: "Hola, ",
-      greetingSuffix: ". Usa el botón para confirmar tu asistencia.",
-      statusPrefix: "¡Gracias, ",
-      statusSuffix: "! Tu asistencia quedó confirmada.",
-    },
-  },
-} as const;
-
-
 async function fetchWeddingContent() {
   try {
     const res = await fetch("/api/content", { cache: "no-store" });
@@ -285,14 +165,13 @@ function ConfirmButton() {
 
 export default function Page() {
 
-  const [wedding, setWeddingContent] = useState<WeddingContent | null>(null);
+  const [wedding, setWeddingContent] = useState<any>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const mounted = useMounted();
   const countdown = useCountdown('2026-02-28');
 
     useEffect(() => {
       fetchWeddingContent().then((data) => {
-          console.log('data from api', data);
           setWeddingContent(data)
       });
     }, []);
@@ -394,7 +273,7 @@ export default function Page() {
       >
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4 text-neutral-700">
-            {wedding.copy.story.paragraphs.map((text) => (
+            {wedding.copy.story.paragraphs.map((text: any) => (
               <p key={text}>{text}</p>
             ))}
           </div>
@@ -420,7 +299,7 @@ export default function Page() {
           </div>
 
           <div className="space-y-8">
-            {wedding.schedule.map((item) => (
+            {wedding.schedule.map((item: any) => (
               <div key={item.time} className="relative pl-14">
                 {/* Nodo de tiempo */}
                 <div className="absolute left-0 top-2 w-12 text-center  h-12 rounded-full bg-white border-2 border-natural-200 flex items-center justify-center shadow-sm">
@@ -470,7 +349,7 @@ export default function Page() {
               {wedding.copy.itinerary.womenDescription}
             </p>
             <div className="flex flex-wrap gap-2 mt-1">
-              {wedding.colors.womenPalette.map((c) => (
+              {wedding.colors.womenPalette.map((c: any) => (
                 <span
                   key={c}
                   className="w-6 h-6 rounded-full border border-white shadow-sm"
@@ -492,7 +371,7 @@ export default function Page() {
               {wedding.copy.itinerary.menDescription}
             </p>
             <div className="flex flex-wrap gap-2 mt-1">
-              {wedding.colors.menPalette.map((c) => (
+              {wedding.colors.menPalette.map((c: any) => (
                 <span
                   key={c}
                   className="w-6 h-6 rounded-full border border-white shadow-sm"
@@ -546,7 +425,7 @@ export default function Page() {
             <p>{wedding.copy.honeymoon.paragraph2}</p>
             <p>{wedding.copy.honeymoon.paragraph3}</p>
             <p className="italic text-neutral-600">
-              {wedding.copy.honeymoon.signature.split("\n").map((line, idx) => (
+              {wedding.copy.honeymoon.signature.split("\n").map((line: any, idx: number) => (
                 <React.Fragment key={idx}>
                   {line}
                   <br />
