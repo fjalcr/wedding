@@ -13,6 +13,12 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.documentTypeList('guests').title('Guests')
         ),
+      S.listItem()
+        .title('Content')
+        .schemaType('content')
+        .child(
+          S.documentTypeList('content').title('Content')
+        ),
 
       // y luego el resto de items...
     ])
