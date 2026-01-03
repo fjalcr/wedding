@@ -16,6 +16,25 @@ const CONTENT_QUERY = `
     "storyUrl": story.asset->url,
     "honeymoonBoxUrl": honeymoonBox.asset->url,
     "thanksUrl": thanks.asset->url
+  },
+  copy{
+    ...,
+    hotel{
+      ...,
+      "imageUrl": image.asset->url
+    },
+    photoapp{
+      ...,
+      "imageUrl": image.asset->url
+    },
+    ceremony{
+      ...,
+      "imageUrl": image.asset->url
+    },
+    itinerary{
+      ...,
+      "imageUrl": codeImage.asset->url
+    }
   }
 }
 `

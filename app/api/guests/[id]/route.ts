@@ -19,7 +19,8 @@ export async function GET(
         nombre,
         correo,
         code,
-        confirm
+        confirm,
+        companions
       }
     `;
 

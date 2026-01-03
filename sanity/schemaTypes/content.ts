@@ -154,6 +154,27 @@ export default defineType({
           ],
         }),
 
+        defineField({
+          name: "ceremony",
+          title: "Ceremonia",
+          type: "object",
+          fields: [
+            { name: "title", title: "Título", type: "string" },
+            {
+              name: "paragraphs",
+              title: "Párrafos",
+              type: "array",
+              of: [{ type: "text" }],
+            },
+            {
+              name: "image",
+              title: "Hacienda",
+              type: "image",
+              options: { hotspot: true },
+            }
+          ],
+        }),
+
         // Nuestra historia
         defineField({
           name: "story",
@@ -197,6 +218,12 @@ export default defineType({
               title: "Subtítulo Dress code",
               type: "text",
             },
+            {
+              name: "codeImage",
+              title: "Imagen código vestimenta",
+              type: "image",
+              options: { hotspot: true },
+            },
 
             // Mujeres
             { name: "womenTitle", title: "Título Mujeres", type: "string" },
@@ -207,6 +234,28 @@ export default defineType({
             { name: "menTitle", title: "Título Hombres", type: "string" },
             { name: "menDescription", title: "Descripción Hombres", type: "text" },
             { name: "menForbidden", title: "Colores no permitidos (Hombres)", type: "text" },
+          ],
+        }),
+
+        // Nuestra historia
+        defineField({
+          name: "hotel",
+          title: "Sugerencia de hospedaje",
+          type: "object",
+          fields: [
+            { name: "title", title: "Título", type: "string" },
+            { name: "subtitle", title: "Subtítulo", type: "string" },
+            { name: "price", title: "Precio", type: "string" },
+            { name: "number", title: "Número", type: "string" },
+            { name: "whatsapp", title: "Whatsapp", type: "string" },
+            { name: "linkTitle", title: "Link", type: "string" },
+            { name: "link", title: "sitio", type: "url" },
+            {
+              name: "image",
+              title: "Imagen Hotel",
+              type: "image",
+              options: { hotspot: true },
+            }
           ],
         }),
 
@@ -236,13 +285,34 @@ export default defineType({
             { name: "subtitle", title: "Subtítulo", type: "string" },
             { name: "paragraph1", title: "Párrafo 1", type: "text" },
             { name: "paragraph2", title: "Párrafo 2", type: "text" },
-            { name: "paragraph3", title: "Párrafo 3", type: "text" },
+            { name: "textAmazon", title: "Amazon", type: "string" },
+            { name: "linkAmazon", title: "Link Amazon", type: "string" },
+            { name: "textLiverpool", title: "Liverpool", type: "string" },
+            { name: "linkLiverpool", title: "Link Liverpool", type: "string" },
             {
               name: "signature",
               title: "Firma",
               type: "text",
               description: "Puedes usar saltos de línea con \\n",
             },
+          ],
+        }),
+
+
+        // Fotos
+        defineField({
+          name: "photoapp",
+          title: "Fotos",
+          type: "object",
+          fields: [
+            { name: "title", title: "Título", type: "string" },
+            { name: "link", title: "Link", type: "url" },
+            {
+              name: "image",
+              title: "Qr",
+              type: "image",
+              options: { hotspot: true },
+            }
           ],
         }),
 

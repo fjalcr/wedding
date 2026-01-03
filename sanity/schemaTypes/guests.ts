@@ -11,6 +11,16 @@ export default defineType({
             type: "string",
         }),
         defineField({
+            name: "companions",
+            title: "Acompaniante",
+            type: "number",
+        }),
+        defineField({
+            name: "companionsConfirmed",
+            title: "Acompaniantes confirmados",
+            type: "number",
+        }),
+        defineField({
             name: "confirm",
             title: "Asiste",
             type: "boolean",

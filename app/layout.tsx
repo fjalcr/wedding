@@ -1,3 +1,10 @@
+import { Rouge_Script } from "next/font/google";
+
+export const rougeScript = Rouge_Script({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-rouge-script",
+});
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -9,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="es" className={`scroll-smooth ${rougeScript.variable}`}>
      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
