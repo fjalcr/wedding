@@ -770,26 +770,45 @@ export default function Page() {
 
           {/* Modal gracias */}
           {showModal && (
-            <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-              onClick={() => setShowModal(false)}
-              role="button"
-              aria-label="Cerrar"
-            >
-              <div
-                className="relative max-w-sm w-full px-6"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="rounded-3xl overflow-hidden shadow-2xl bg-transparent">
-                  <img
-                    src="/mnt/data/ChatGPT Image 23 nov 2025, 08_58_43 p.m..png"
-                    alt="Gracias, te esperamos en nuestro día"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+  <div
+    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-6"
+    onClick={() => setShowModal(false)}
+    role="button"
+    aria-label="Cerrar"
+  >
+    <div
+      className="relative w-full max-w-md"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="rounded-[32px] bg-[#fbf8f2] px-8 py-10 text-center shadow-2xl">
+        {/* Título */}
+        <h3 className="font-script text-[42px] md:text-[48px] text-neutral-900 leading-none">
+          Muchas gracias
+        </h3>
+
+        {/* Separador sutil */}
+        <div className="mx-auto my-5 h-px w-20 bg-neutral-300/70" />
+
+        {/* Mensaje */}
+        <p className="text-neutral-700 text-base md:text-lg leading-relaxed">
+          Tu asistencia quedó confirmada,
+          <br />
+          nos vemos el <span className="font-medium">28 de febrero</span>.
+        </p>
+
+        {/* CTA cerrar */}
+        <button
+          type="button"
+          onClick={() => setShowModal(false)}
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-neutral-900 px-8 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
           </div>
         </main>
       )}
