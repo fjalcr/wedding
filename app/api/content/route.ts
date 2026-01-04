@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { prodClient } from '../../../sanity/client'
 
+export const dynamic = 'force-dynamic'
+
 const CONTENT_QUERY = `
     *[
   _type == "content" &&

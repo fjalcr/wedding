@@ -8,9 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
-        fontFamily: {
-          script: ["var(--font-rouge-script)", "cursive"],
+      colors: {
+        primary: {
+          DEFAULT: "#778c43",
+          dark: "#667839",
         },
+      },
+      fontFamily: {
+        script: ["var(--font-rouge-script)", "cursive"],
+        zain: ["var(--font-zain)", "sans-serif"],
+        serif: ["'Playfair Display'", "serif"],
+      },
     },
   },
   plugins: [],

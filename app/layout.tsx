@@ -1,9 +1,15 @@
-import { Rouge_Script } from "next/font/google";
+import { Rouge_Script, Zain } from "next/font/google";
 
 export const rougeScript = Rouge_Script({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-rouge-script",
+});
+
+export const zain = Zain({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-zain",
 });
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`scroll-smooth ${rougeScript.variable}`}>
-     <head>
+    <html lang="es" className={`scroll-smooth ${rougeScript.variable} ${zain.variable}`}>
+      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -25,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body className="font-zain font-light">{children}</body>
     </html>
   );
 }
