@@ -879,17 +879,6 @@ export default function Page() {
                                                     {wedding.copy.honeymoon.textLiverpool}
                                                 </a>
                                             </div>
-
-                                            <p className="italic text-neutral-600 pt-2">
-                                                {wedding.copy.honeymoon.signature
-                                                    .split("\n")
-                                                    .map((line: any, idx: number) => (
-                                                        <React.Fragment key={idx}>
-                                                            {line}
-                                                            <br />
-                                                        </React.Fragment>
-                                                    ))}
-                                            </p>
                                         </div>
                                     </div>
 
@@ -898,7 +887,7 @@ export default function Page() {
                         </Section>
 
                         {/* Galería / Photoapp (centrado) */}
-                        <Section id="galeria" title={wedding.copy.photoapp.title}>
+                        <Section id="galeria" title={wedding.copy.photoapp.title} subtitle="Queremos que no te pierdas ningún detalle, por eso hemos creado un álbum en Dots Memories. Te pedimos un favor especial: <b>sube ahí todas las fotos y vídeos que tomes.</b> Nos hará mucha ilusión reunir esos recuerdos. <br> <br>Te recomendamos descargar la app y acceder al álbum antes del evento.">
                             <div className="max-w-3xl mx-auto">
                                 <div className="flex flex-col items-center">
                                     <img
@@ -906,7 +895,7 @@ export default function Page() {
                                         alt="Hero"
                                         className="w-60"
                                     />
-                                    <div className="mt-6">
+                                    <div className="mt-12">
                                         <a
                                             href={wedding.copy.photoapp.link}
                                             target="_blank"
@@ -928,13 +917,23 @@ export default function Page() {
                         >
                             <ConfirmButton wedding={wedding} onConfirmed={() => setShowModal(true)} />
 
-                            <div className="mt-8 mb-8 flex justify-center opacity-80">
+                            <div className="mt-8 mb-2 flex justify-center opacity-80">
                                 <img
                                     src={wedding.images.thanksUrl}
                                     alt="Logo final"
                                     className="w-32 md:w-40 h-auto object-contain"
                                 />
                             </div>
+                            <p className="italic text-neutral-600 mb-8">
+                                {wedding.copy.honeymoon.signature
+                                    .split("\n")
+                                    .map((line: any, idx: number) => (
+                                        <React.Fragment key={idx}>
+                                            {line}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                            </p>
                         </Section>
 
                         {/* Modal gracias */}
