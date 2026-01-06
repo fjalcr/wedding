@@ -5,6 +5,8 @@ import { apiVersion } from '../env'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
+import { generateGuestCode } from '../lib/utils'
+
 export function GuestsDashboard() {
     const client = useClient({ apiVersion })
     const [guests, setGuests] = useState<any[]>([])
@@ -35,6 +37,33 @@ export function GuestsDashboard() {
         fetchGuests()
     }, [client])
 
+    const handleGenerateCodes = async () => {
+        const guestsToUpdate = guests.filter(g => !g.code);
+        if (guestsToUpdate.length === 0) {
+            alert("Todos los invitados ya tienen código.");
+            return;
+        }
+
+        if (!confirm(`Se generarán códigos para ${guestsToUpdate.length} invitados. ¿Continuar?`)) return;
+
+        const transaction = client.transaction();
+
+        guestsToUpdate.forEach(guest => {
+            transaction.patch(guest._id, p => p.set({ code: generateGuestCode() }));
+        });
+
+        try {
+            await transaction.commit();
+            alert("Códigos generados correctamente");
+            // Refresh data
+            const data = await client.fetch(`*[_type == "guests"] | order(nombre asc)`)
+            setGuests(data)
+        } catch (err) {
+            console.error(err);
+            alert("Error al generar códigos");
+        }
+    }
+
     const generatePDF = () => {
         const doc = new jsPDF()
 
@@ -51,7 +80,7 @@ export function GuestsDashboard() {
             guest.nombre,
             guest.companions ? `+${guest.companions}` : '0',
             guest.confirm ? `SI (${guest.companionsConfirmed ? '+' + guest.companionsConfirmed : '0'})` : 'NO',
-            `https://www.adrianayeduardo.com/?guest=${guest._id}`
+            `https://www.adrianayeduardo.com/?guest=${guest.code || guest._id}`
         ])
 
         autoTable(doc, {
@@ -69,11 +98,18 @@ export function GuestsDashboard() {
                 <Stack space={4}>
                     <Flex justify="space-between" align="center">
                         <Text size={4} weight="bold">Resumen de Invitados</Text>
-                        <Button
-                            text="Descargar PDF"
-                            tone="primary"
-                            onClick={generatePDF}
-                        />
+                        <Flex gap={2}>
+                            <Button
+                                text="Generar Códigos"
+                                tone="positive"
+                                onClick={handleGenerateCodes}
+                            />
+                            <Button
+                                text="Descargar PDF"
+                                tone="primary"
+                                onClick={generatePDF}
+                            />
+                        </Flex>
                     </Flex>
 
                     <Grid columns={[2, 2, 4]} gap={3}>
@@ -134,7 +170,7 @@ export function GuestsDashboard() {
                                 <Box>
                                     <Text size={1} style={{ wordBreak: 'break-all' }}>
                                         <a
-                                            href={`https://www.adrianayeduardo.com/?guest=${guest._id}`}
+                                            href={`https://www.adrianayeduardo.com/?guest=${guest.code || guest._id}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             style={{ color: '#2276fc', textDecoration: 'none' }}
@@ -148,7 +184,7 @@ export function GuestsDashboard() {
                     ))}
                 </Stack>
             </Stack>
-        </Container>
+        </Container >
     )
 }
 

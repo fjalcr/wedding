@@ -13,14 +13,15 @@ export async function GET(
       *[
         _type == "guests" &&
         !(_id in path("drafts.**")) &&
-        _id == $id
+        (_id == $id || lower(code) == lower($id))
       ][0]{
         _id,
         nombre,
         correo,
         code,
         confirm,
-        companions
+        companions,
+        companionsConfirmed
       }
     `;
 
