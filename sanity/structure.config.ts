@@ -1,4 +1,5 @@
 import { StructureResolver } from 'sanity/structure'
+import { GuestsDashboard } from './components/GuestsDashboard'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -12,6 +13,13 @@ export const structure: StructureResolver = (S) =>
         .schemaType('guests')
         .child(
           S.documentTypeList('guests').title('Guests')
+        ),
+      S.listItem()
+        .title('Resumen de Invitados')
+        .child(
+          S.component()
+            .component(GuestsDashboard)
+            .title('Resumen de Invitados')
         ),
       S.listItem()
         .title('Content')

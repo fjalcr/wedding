@@ -347,32 +347,34 @@ function ConfirmButton({ wedding, onConfirmed }: { wedding: any, onConfirmed?: (
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
-                <div className="flex items-center justify-center gap-2">
-                    <label htmlFor="companions" className="text-base text-neutral-700">
-                        Acompañantes
-                    </label>
+                {maxAllowed > 0 && (
+                    <div className="flex items-center justify-center gap-2">
+                        <label htmlFor="companions" className="text-base text-neutral-700">
+                            Acompañantes
+                        </label>
 
-                    <input
-                        id="companions"
-                        type="number"
-                        inputMode="numeric"
-                        min={0}
-                        max={maxAllowed}
-                        value={companionsConfirmed}
-                        onChange={(e) => {
-                            const raw = e.target.value;
-                            if (raw === "") {
-                                setCompanionsConfirmed(0);
-                                return;
-                            }
-                            setCompanionsConfirmed(clamp(Number(raw)));
-                        }}
-                        className="w-24 rounded-xl border border-neutral-300 bg-white px-3 py-3 text-base outline-none focus:ring-2 focus:ring-neutral-900/20"
-                        disabled={loading || !guest?._id}
-                    />
+                        <input
+                            id="companions"
+                            type="number"
+                            inputMode="numeric"
+                            min={0}
+                            max={maxAllowed}
+                            value={companionsConfirmed}
+                            onChange={(e) => {
+                                const raw = e.target.value;
+                                if (raw === "") {
+                                    setCompanionsConfirmed(0);
+                                    return;
+                                }
+                                setCompanionsConfirmed(clamp(Number(raw)));
+                            }}
+                            className="w-24 rounded-xl border border-neutral-300 bg-white px-3 py-3 text-base outline-none focus:ring-2 focus:ring-neutral-900/20"
+                            disabled={loading || !guest?._id}
+                        />
 
-                    <span className="text-sm text-neutral-500">máx {maxAllowed}</span>
-                </div>
+                        <span className="text-sm text-neutral-500">máx {maxAllowed}</span>
+                    </div>
+                )}
 
                 <button
                     onClick={confirm}
