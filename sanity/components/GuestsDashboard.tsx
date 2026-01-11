@@ -2,8 +2,7 @@ import { Card, Container, Grid, Text, Stack, Box, Button, Flex } from '@sanity/u
 import { useClient } from 'sanity'
 import { useEffect, useState } from 'react'
 import { apiVersion } from '../env'
-import jsPDF from 'jspdf'
-import autoTable from 'jspdf-autotable'
+
 
 import { generateGuestCode } from '../lib/utils'
 
@@ -64,32 +63,29 @@ export function GuestsDashboard() {
         }
     }
 
-    const generatePDF = () => {
-        const doc = new jsPDF()
-
-        doc.setFontSize(18)
-        doc.text("Resumen de Invitados", 14, 22)
-
-        doc.setFontSize(11)
-        doc.text(`Total Invitaciones: ${stats.totalInvites}`, 14, 30)
-        doc.text(`Confirmadas: ${stats.confirmedInvites}`, 14, 36)
-        doc.text(`Total Personas: ${stats.totalGuests}`, 14, 42)
-        doc.text(`Personas Confirmadas: ${stats.confirmedGuests}`, 14, 48)
-
-        const tableData = guests.map(guest => [
+    const generateCSV = () => {
+        const headers = ['Nombre', 'Acompañantes', 'Confirmado', 'Confirmados', 'Link'];
+        const rows = guests.map(guest => [
             guest.nombre,
-            guest.companions ? `+${guest.companions}` : '0',
-            guest.confirm ? `SI (${guest.companionsConfirmed ? '+' + guest.companionsConfirmed : '0'})` : 'NO',
+            guest.companions || 0,
+            guest.confirm ? 'SI' : 'NO',
+            guest.companionsConfirmed || 0,
             `https://www.adrianayeduardo.com/?guest=${guest.code || guest._id}`
-        ])
+        ]);
 
-        autoTable(doc, {
-            head: [['Nombre', 'Acomp.', 'Confirmado', 'Link']],
-            body: tableData,
-            startY: 55,
-        })
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        ].join('\n');
 
-        doc.save("invitados-boda.pdf")
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'invitados-boda.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 
     return (
@@ -105,9 +101,9 @@ export function GuestsDashboard() {
                                 onClick={handleGenerateCodes}
                             />
                             <Button
-                                text="Descargar PDF"
+                                text="Descargar CSV"
                                 tone="primary"
-                                onClick={generatePDF}
+                                onClick={generateCSV}
                             />
                         </Flex>
                     </Flex>
